@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using static Unity.Burst.Intrinsics.X86.Avx;
+using UnityEngine.Diagnostics;
 
 public class GitController : MonoBehaviour
 {
@@ -47,4 +49,46 @@ public class GitController : MonoBehaviour
 
     }
 
+    string[] excludes = {
+        "/[Ll]ibrary /",
+        "/[Tt]emp /",
+        "/[Oo]bj /",
+        "/[Bb]uild /",
+        "/[Bb]uilds /",
+        "/[Ll]ogs /",
+        "/[Uu]ser[Ss]ettings /",
+        "/[Mm]emoryCaptures /",
+        "!/[Aa]ssets/**/*.meta",
+        "/[Aa]ssets / Plugins / Editor / JetBrains *",
+        ".vs /",
+        ".gradle /",
+        "ExportedObj /",
+        ".consulo /",
+        "*.csproj",
+        "*.unityproj",
+        "*.sln",
+        "*.suo",
+        "*.tmp",
+        "*.user",
+        "*.userprefs",
+        "*.pidb",
+        "*.booproj",
+        "*.svd",
+        "*.pdb",
+        "*.mdb",
+        "*.opendb",
+        "*.apk",
+        "*.unitypackage",
+        "*.VC.db",
+        "*.pidb.meta",
+        "*.pdb.meta",
+        "*.mdb.meta",
+        "sysinfo.txt",
+        "crashlytics - build.properties",
+        "/[Aa]ssets /[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*",
+        "/[Aa]ssets/[Ss]treamingAssets/aa.meta",
+        "/[Aa]ssets/[Ss]treamingAssets/aa/*",
+        "!*.dll",
+        "!*.obj",
+    };
 }
