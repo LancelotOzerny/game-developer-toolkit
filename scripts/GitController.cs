@@ -59,7 +59,7 @@ public class GitController : MonoBehaviour
     [MenuItem("Tools/Git/Status")]
     public static void Status()
     {
-     
+        
     }
 
     [MenuItem("Tools/Git/Shortlog 10")]
