@@ -22,26 +22,19 @@ public class GitWindow : EditorWindow
     {
         if (GitController.Instance.Exists())
         {
-            GUILayout.Label("Indexing Area", GUILayout.Height(50));
-            GUILayout.Space(10);
-            if (GUILayout.Button("Add All Files", GUILayout.Height(50)))
-            {
-                GitController.Instance.AddAll();
-            }
-
-            GUILayout.Label("Commit Area", GUILayout.Height(50));
-            GUILayout.Space(10);
-            CommitArea();
+            AreaIndexing();
+            AreaPush();
+            AreaCommit();
         }
         else
         {
-            InitView();
+            AreaInit();
         }
     }
 
 
     // VIEW METHOD
-    private void InitView()
+    private void AreaInit()
     {
         GUILayout.Space(10);
         if (GUILayout.Button("Git initialize", GUILayout.Height(50)))
@@ -59,8 +52,10 @@ public class GitWindow : EditorWindow
             GitController.Instance.AddAll();
         }
     }
-    private void CommitArea()
+    private void AreaCommit()
     {
+        GUILayout.Label("Commit Area", GUILayout.Height(50));
+        GUILayout.Space(10);
         commitText = GUILayout.TextField(commitText, GUILayout.Height(50));
         GUILayout.Space(10);
         amend = GUILayout.Toggle(amend, "Amend");
@@ -73,6 +68,24 @@ public class GitWindow : EditorWindow
                 commitText = "";
                 amend = false;
             }
+        }
+    }
+    private void AreaPush()
+    {
+        GUILayout.Label("Push Area", GUILayout.Height(50));
+        GUILayout.Space(10);
+        if (GUILayout.Button("Push Origin", GUILayout.Height(50)))
+        {
+            GitController.Instance.Push("origin");
+        }
+    }
+    private void AreaIndexing()
+    {
+        GUILayout.Label("Indexing Area", GUILayout.Height(50));
+        GUILayout.Space(10);
+        if (GUILayout.Button("Add All Files", GUILayout.Height(50)))
+        {
+            GitController.Instance.AddAll();
         }
     }
 }

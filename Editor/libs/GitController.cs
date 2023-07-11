@@ -1,3 +1,4 @@
+using Codice.CM.Common.Replication;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -103,6 +104,11 @@ public class GitController
     public void Commit(String message)
     {
         string[] commands = { $"git commit -m \"{ message }\"" };
+        Run(commands);
+    }
+    public void Push(string remote)
+    {
+        string[] commands = { "git push " + remote };
         Run(commands);
     }
 }
