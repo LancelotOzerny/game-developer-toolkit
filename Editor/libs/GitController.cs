@@ -6,15 +6,7 @@ using UnityEngine;
 
 public class GitController
 {
-    private static GitController instance = null;
-    public static GitController Instance
-    {
-        get
-        {
-            if (instance == null) instance = new GitController();
-            return instance;
-        }
-    }
+    // TEMPLATES
     private string[] _excludes = {
         "/[Ll]ibrary/",
         "/[Tt]emp/",
@@ -57,13 +49,21 @@ public class GitController
         "!*.obj",
         "*.gitignore",
     };
-
-
-
-    public bool Exists()
+    
+    
+    // PATTERNS
+    public static GitController Instance
     {
-        return Directory.Exists(Directory.GetCurrentDirectory() + "/.git");
+        get
+        {
+            if (instance == null) instance = new GitController();
+            return instance;
+        }
     }
+    private static GitController instance = null;
+
+
+    // GIT REPAIR METHODS
     private void Run(string[] commands)
     {
         foreach (string command in commands)
@@ -71,6 +71,13 @@ public class GitController
             Debug.Log(command);
             System.Diagnostics.Process.Start("cmd.exe", "/C" + command);
         }
+    }
+
+
+    // GIT COMMANDS
+    public bool Exists()
+    {
+        return Directory.Exists(Directory.GetCurrentDirectory() + "/.git");
     }
     public void Init()
     {
@@ -93,7 +100,6 @@ public class GitController
         string[] commands = { "git add ." };
         Run(commands);
     }
-
     public void Commit(String message)
     {
         string[] commands = { $"git commit -m \"{ message }\"" };
