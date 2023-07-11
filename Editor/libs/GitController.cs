@@ -106,9 +106,9 @@ public class GitController
         string[] commands = { $"git commit -m \"{ message }\"" };
         Run(commands);
     }
-    public void Push(string remote)
+    public void Push(string remote, string branch)
     {
-        string[] commands = { "git push " + remote };
+        string[] commands = { "git push " + remote + " " + branch};
         Run(commands);
     }
 }

@@ -76,7 +76,7 @@ public class GitWindow : EditorWindow
         GUILayout.Space(10);
         if (GUILayout.Button("Push Origin", GUILayout.Height(50)))
         {
-            GitController.Instance.Push("origin");
+            GitController.Instance.Push("origin", "master");
         }
     }
     private void AreaIndexing()
