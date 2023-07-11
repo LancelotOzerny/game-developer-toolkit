@@ -94,4 +94,9 @@ public class GitController
         Run(commands);
     }
 
+    public void Commit(String message)
+    {
+        string[] commands = { $"git commit -m \"{ message }\"" };
+        Run(commands);
+    }
 }

@@ -25,11 +25,16 @@ public class GitWindow : EditorWindow
     {
         if (GitController.Instance.Exists())
         {
+            GUILayout.Label("Indexing Area", GUILayout.Height(50));
             GUILayout.Space(10);
             if (GUILayout.Button("Add All Files", GUILayout.Height(50)))
             {
                 GitController.Instance.AddAll();
             }
+
+            GUILayout.Label("Commit Area", GUILayout.Height(50));
+            GUILayout.Space(10);
+            CommitArea();
         }
         else
         {
@@ -37,10 +42,25 @@ public class GitWindow : EditorWindow
         }
     }
 
+    private void CommitArea()
+    {
+        commitText = GUILayout.TextField(commitText, GUILayout.Height(50));
+        GUILayout.Space(10);
+        amend = GUILayout.Toggle(amend, "Amend");
+        GUILayout.Space(10);
+        if (GUILayout.Button("Commit", GUILayout.Height(50)))
+        {
+            if (commitText.Length > 0)
+            {
+                GitController.Instance.Commit(commitText);
+                commitText = "";
+                amend = false;
+            }
+        }
+    }
+
     private void InitView()
     {
-        if (commitText == string.Empty) commitText = "Начало проекта. Подготовил необходимые для проекта ресурсы.";
-        
         GUILayout.Space(10);
         if (GUILayout.Button("Git initialize", GUILayout.Height(50)))
         {
