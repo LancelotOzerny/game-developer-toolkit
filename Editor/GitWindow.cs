@@ -7,20 +7,17 @@ using UnityEngine;
 
 public class GitWindow : EditorWindow
 {
+    // GIT WORK VARIABLES
+    private string commitText = "";
+    private bool amend = false;
+
+    
+    // STANDART METHODS
     [MenuItem("Tools/Git Editor")]
     public static void Show()
     {
         EditorWindow.GetWindow(typeof(GitWindow));
     }
-
-
-
-    // GIT WORK METHODS
-    private string commitText = "";
-    private bool amend = false;
-
-
-
     private void OnGUI()
     {
         if (GitController.Instance.Exists())
@@ -42,23 +39,8 @@ public class GitWindow : EditorWindow
         }
     }
 
-    private void CommitArea()
-    {
-        commitText = GUILayout.TextField(commitText, GUILayout.Height(50));
-        GUILayout.Space(10);
-        amend = GUILayout.Toggle(amend, "Amend");
-        GUILayout.Space(10);
-        if (GUILayout.Button("Commit", GUILayout.Height(50)))
-        {
-            if (commitText.Length > 0)
-            {
-                GitController.Instance.Commit(commitText);
-                commitText = "";
-                amend = false;
-            }
-        }
-    }
 
+    // VIEW METHOD
     private void InitView()
     {
         GUILayout.Space(10);
@@ -75,6 +57,22 @@ public class GitWindow : EditorWindow
             }
 
             GitController.Instance.AddAll();
+        }
+    }
+    private void CommitArea()
+    {
+        commitText = GUILayout.TextField(commitText, GUILayout.Height(50));
+        GUILayout.Space(10);
+        amend = GUILayout.Toggle(amend, "Amend");
+        GUILayout.Space(10);
+        if (GUILayout.Button("Commit", GUILayout.Height(50)))
+        {
+            if (commitText.Length > 0)
+            {
+                GitController.Instance.Commit(commitText);
+                commitText = "";
+                amend = false;
+            }
         }
     }
 }
