@@ -22,6 +22,9 @@ namespace Lancy
         string commitText = "";
         bool isAmend = false;
 
+        string _currentBranch = "master";
+        string _currentRemote = "origin";
+
         private void OnGUI()
         {
             // Repository is exist
@@ -55,6 +58,13 @@ namespace Lancy
                         commitText = string.Empty;
                     }
                     break;
+
+                case "remote":
+                    if (_view.Push(_currentRemote, _currentBranch))
+                    {
+                        GitController.Instance.Push(_currentRemote, _currentBranch);
+                    }
+                    break;
             }
         }
     }
@@ -73,6 +83,12 @@ namespace Lancy
             amend = GUILayout.Toggle(amend, "Amend", GUILayout.Height(50));
             return GUILayout.Button("Commit", GUILayout.Height(50));
         }
+
+        public bool Push(string remote, string branch)
+        {
+            GUILayout.Label("Push Area", GUILayout.Height(50));
+            return GUILayout.Button($"Push {remote} {branch}", GUILayout.Height(50));
+        }
     }
 }
 
@@ -88,16 +104,6 @@ public class GitWindow : EditorWindow
     private void OnGUI()
     {
         AreaIndexing();
-        AreaPush();
-    }
-    private void AreaPush()
-    {
-        GUILayout.Label("Push Area", GUILayout.Height(50));
-        GUILayout.Space(10);
-        if (GUILayout.Button("Push Origin", GUILayout.Height(50)))
-        {
-            GitController.Instance.Push("origin", "master");
-        }
     }
     private void AreaIndexing()
     {
