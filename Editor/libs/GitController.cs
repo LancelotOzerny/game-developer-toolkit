@@ -101,9 +101,19 @@ public class GitController
         string[] commands = { "git add ." };
         Run(commands);
     }
+    private string GetCommitMessage(string message)
+    {
+        message = message.Replace("\n", "\" -m \"");
+        return $"-m \"{message}\"";
+    }
     public void Commit(String message)
     {
-        string[] commands = { $"git commit -m \"{ message }\"" };
+        string[] commands = { $"git commit {GetCommitMessage(message)}"};
+        Run(commands);
+    }
+    public void Amend(String message)
+    {
+        string[] commands = { $"git commit --amend {GetCommitMessage(message)}" };
         Run(commands);
     }
     public void Push(string remote, string branch)
