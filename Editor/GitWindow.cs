@@ -56,7 +56,7 @@ public class GitWindow : EditorWindow
     {
         GUILayout.Label("Commit Area", GUILayout.Height(50));
         GUILayout.Space(10);
-        commitText = GUILayout.TextField(commitText, GUILayout.Height(50));
+        commitText = GUILayout.TextArea(commitText, GUILayout.Height(50));
         GUILayout.Space(10);
         amend = GUILayout.Toggle(amend, "Amend");
         GUILayout.Space(10);
